@@ -1,0 +1,3 @@
+package larasd;
+
+@license(LGPL);

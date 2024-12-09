@@ -1,0 +1,2376 @@
+version 3
+run UDP-0-20241209-17:46:57-15464
+attr configname UDP
+attr datetime 20241209-17:46:57
+attr datetimef 20241209-174657
+attr experiment UDP
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network manets
+attr processid 15464
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../inet4.5/images
+config **.nodoFijo1.numApps 1
+config **.nodoFijo2.numApps 1
+config **.nodoFijo1.app[0].typename UdpBasicApp
+config **.nodoFijo1.app[0].destAddresses "\"nodoFijo2\""
+config **.nodoFijo1.app[0].destPort 1000
+config **.nodoFijo1.app[0].startTime 5s
+config **.nodoFijo1.app[0].messageLength 50B
+config **.nodoFijo1.app[0].sendInterval 0.25s
+config **.nodoFijo2.app[0].typename UdpEchoApp
+config **.nodoFijo2.app[0].localPort 1000
+config network manets
+config seed-0-mt 4
+config **.wlan[*].typename AckingWirelessInterface
+config **.wlan[*].bitrate 2Mbps
+config **.wlan[*].mac.headerLength 20B
+config **.wlan[*].radio.typename UnitDiskRadio
+config **.wlan[*].radio.transmitter.headerLength 96b
+config **.wlan[*].radio.transmitter.communicationRange 400m
+config **.wlan[*].radio.transmitter.interferenceRange 0m
+config **.wlan[*].radio.transmitter.detectionRange 0m
+config **.wlan[*].radio.receiver.ignoreInterference true
+config *.n 7
+config **.mobility.initFromDisplayString false
+config **.nodoMovil[*].mobility.typename MassMobility
+config **.nodoMovil[*].mobility.speed 1mps
+config **.mobility.constraintAreaMinZ 0m
+config **.mobility.constraintAreaMaxZ 0m
+config **.mobility.constraintAreaMinX 0m
+config **.mobility.constraintAreaMinY 0m
+config **.mobility.constraintAreaMaxX 1200m
+config **.mobility.constraintAreaMaxY 600m
+config **.nodoMovil[*].mobility.changeInterval "normal(5s, 0.1s)"
+config **.nodoMovil[*].mobility.changeAngleBy "normal(0deg, 30deg)"
+config **.nodoFijo1.mobility.initialX 0m
+config **.nodoFijo1.mobility.initialY 300m
+config **.nodoFijo2.mobility.initialX 1200m
+config **.nodoFijo2.mobility.initialY 300m
+config **.dataLinkVisualizer.displayLinks true
+config **.nodoMovil*.wlan[*].radio.displayCommunicationRange true
+config **.networkRouteVisualizer.displayRoutes true
+
+vector 0 manets.nodoFijo1.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 1 manets.nodoFijo1.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 2 manets.nodoFijo1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 3 manets.nodoFijo1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 4 manets.nodoFijo1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 5 manets.nodoFijo2.wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 6 manets.nodoFijo2.wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 7 manets.nodoFijo2.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 8 manets.nodoFijo2.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 9 manets.nodoFijo2.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 10 manets.nodoMovil[0].wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 11 manets.nodoMovil[0].wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 12 manets.nodoMovil[0].udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 13 manets.nodoMovil[0].udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 14 manets.nodoMovil[0].udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 15 manets.nodoMovil[1].wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 16 manets.nodoMovil[1].wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 17 manets.nodoMovil[1].udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 18 manets.nodoMovil[1].udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 19 manets.nodoMovil[1].udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 20 manets.nodoMovil[2].wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 21 manets.nodoMovil[2].wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 22 manets.nodoMovil[2].udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 23 manets.nodoMovil[2].udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 24 manets.nodoMovil[2].udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 25 manets.nodoMovil[3].wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 26 manets.nodoMovil[3].wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 27 manets.nodoMovil[3].udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 28 manets.nodoMovil[3].udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 29 manets.nodoMovil[3].udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 30 manets.nodoMovil[4].wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 31 manets.nodoMovil[4].wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 32 manets.nodoMovil[4].udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 33 manets.nodoMovil[4].udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 34 manets.nodoMovil[4].udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 35 manets.nodoMovil[5].wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 36 manets.nodoMovil[5].wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 37 manets.nodoMovil[5].udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 38 manets.nodoMovil[5].udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 39 manets.nodoMovil[5].udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 40 manets.nodoMovil[6].wlan[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 41 manets.nodoMovil[6].wlan[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 42 manets.nodoMovil[6].udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 43 manets.nodoMovil[6].udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 44 manets.nodoMovil[6].udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 45 manets.nodoFijo1.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 46 manets.nodoFijo2.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 47 manets.nodoMovil[0].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 48 manets.nodoMovil[1].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 49 manets.nodoMovil[2].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 50 manets.nodoMovil[3].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 51 manets.nodoMovil[4].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 52 manets.nodoMovil[5].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 53 manets.nodoMovil[6].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 54 manets.nodoFijo1.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 55 manets.nodoFijo1.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 56 manets.nodoFijo2.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 57 manets.nodoFijo2.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 58 manets.nodoMovil[0].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 59 manets.nodoMovil[0].wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 60 manets.nodoMovil[1].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 61 manets.nodoMovil[1].wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 62 manets.nodoMovil[2].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 63 manets.nodoMovil[2].wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 64 manets.nodoMovil[3].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 65 manets.nodoMovil[3].wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 66 manets.nodoMovil[4].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 67 manets.nodoMovil[4].wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 68 manets.nodoMovil[5].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 69 manets.nodoMovil[5].wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 70 manets.nodoMovil[6].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 71 manets.nodoMovil[6].wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 72 manets.nodoFijo1.app[0] packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 73 manets.nodoFijo1.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 74 manets.nodoFijo1.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 75 manets.nodoFijo1.wlan[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 76 manets.nodoFijo1.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 77 manets.nodoFijo1.wlan[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 78 manets.nodoFijo1.wlan[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 79 manets.nodoFijo1.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 80 manets.nodoFijo1.wlan[0].mac rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 81 manets.nodoFijo1.wlan[0].mac sentDownPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets sent to lower layer, packetBytes"
+vector 82 manets.nodoMovil[3].wlan[0].mac rcvdPkFromLl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromLower
+attr title "packets received from lower layer, packetBytes"
+vector 83 manets.nodoMovil[3].wlan[0].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 84 manets.nodoMovil[5].wlan[0].mac rcvdPkFromLl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromLower
+attr title "packets received from lower layer, packetBytes"
+vector 85 manets.nodoMovil[5].wlan[0].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 86 manets.nodoMovil[2].wlan[0].mac rcvdPkFromLl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromLower
+attr title "packets received from lower layer, packetBytes"
+vector 87 manets.nodoMovil[2].wlan[0].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	0	0	0
+0	357	5	0
+0	464	6	0
+0	573	7	0
+1	0	0	0
+1	0	0	0
+1	0	0	0
+1	0	0	0
+1	0	0	0
+1	357	5	0
+1	464	6	0
+1	573	7	0
+2	0	0	0
+3	0	0	0
+4	0	0	0
+5	0	0	0
+5	0	0	0
+5	0	0	0
+5	0	0	0
+5	0	0	0
+6	0	0	0
+6	0	0	0
+6	0	0	0
+6	0	0	0
+6	0	0	0
+7	0	0	0
+8	0	0	0
+9	0	0	0
+10	0	0	0
+10	0	0	0
+10	0	0	0
+10	0	0	0
+10	0	0	0
+11	0	0	0
+11	0	0	0
+11	0	0	0
+11	0	0	0
+11	0	0	0
+12	0	0	0
+13	0	0	0
+14	0	0	0
+15	0	0	0
+15	0	0	0
+15	0	0	0
+15	0	0	0
+15	0	0	0
+16	0	0	0
+16	0	0	0
+16	0	0	0
+16	0	0	0
+16	0	0	0
+17	0	0	0
+18	0	0	0
+19	0	0	0
+20	0	0	0
+20	0	0	0
+20	0	0	0
+20	0	0	0
+20	0	0	0
+21	0	0	0
+21	0	0	0
+21	0	0	0
+21	0	0	0
+21	0	0	0
+22	0	0	0
+23	0	0	0
+24	0	0	0
+25	0	0	0
+25	0	0	0
+25	0	0	0
+25	0	0	0
+25	0	0	0
+26	0	0	0
+26	0	0	0
+26	0	0	0
+26	0	0	0
+26	0	0	0
+27	0	0	0
+28	0	0	0
+29	0	0	0
+30	0	0	0
+30	0	0	0
+30	0	0	0
+30	0	0	0
+30	0	0	0
+31	0	0	0
+31	0	0	0
+31	0	0	0
+31	0	0	0
+31	0	0	0
+32	0	0	0
+33	0	0	0
+34	0	0	0
+35	0	0	0
+35	0	0	0
+35	0	0	0
+35	0	0	0
+35	0	0	0
+36	0	0	0
+36	0	0	0
+36	0	0	0
+36	0	0	0
+36	0	0	0
+37	0	0	0
+38	0	0	0
+39	0	0	0
+40	0	0	0
+40	0	0	0
+40	0	0	0
+40	0	0	0
+40	0	0	0
+41	0	0	0
+41	0	0	0
+41	0	0	0
+41	0	0	0
+41	0	0	0
+42	0	0	0
+43	0	0	0
+44	0	0	0
+45	0	0	0
+45	0	0	0
+45	0	0	4
+46	0	0	0
+46	0	0	0
+46	0	0	4
+47	0	0	0
+47	0	0	0
+47	0	0	4
+48	0	0	0
+48	0	0	0
+48	0	0	4
+49	0	0	0
+49	0	0	0
+49	0	0	4
+50	0	0	0
+50	0	0	0
+50	0	0	4
+51	0	0	0
+51	0	0	0
+51	0	0	4
+52	0	0	0
+52	0	0	0
+52	0	0	4
+53	0	0	0
+53	0	0	0
+53	0	0	4
+54	0	0	1
+55	0	0	1
+55	358	5	2
+55	367	5.00024	1
+55	466	6	2
+55	476	6.00024	1
+55	575	7	2
+55	585	7.00024	1
+56	0	0	1
+57	0	0	1
+58	0	0	1
+59	0	0	1
+60	0	0	1
+61	0	0	1
+62	0	0	1
+62	361	5.000001115484	3
+62	374	5.000241115484	1
+62	470	6.000001113832	3
+62	483	6.000241113832	1
+62	579	7.000001112187	3
+62	592	7.000241112187	1
+63	0	0	1
+64	0	0	1
+64	359	5.000000389503	3
+64	368	5.000240389503	1
+64	468	6.000000387889	3
+64	477	6.000240387889	1
+64	577	7.000000386296	3
+64	586	7.000240386296	1
+65	0	0	1
+66	0	0	1
+67	0	0	1
+68	0	0	1
+68	360	5.000000796281	3
+68	371	5.000240796281	1
+68	469	6.000000794683	3
+68	480	6.000240794683	1
+68	578	7.000000793096	3
+68	589	7.000240793096	1
+69	0	0	1
+70	0	0	1
+71	0	0	1
+72	349	5	50
+72	399	5.25	50
+72	421	5.5	50
+72	440	5.75	50
+72	463	6	50
+72	508	6.25	50
+72	530	6.5	50
+72	549	6.75	50
+72	572	7	50
+72	617	7.25	50
+72	639	7.5	50
+72	658	7.75	50
+73	355	5	58
+73	400	5.25	58
+73	422	5.5	58
+73	441	5.75	58
+73	465	6	58
+73	509	6.25	58
+73	531	6.5	58
+73	550	6.75	58
+73	574	7	58
+73	618	7.25	58
+73	640	7.5	58
+73	659	7.75	58
+74	356	5	28
+74	462	6	28
+74	571	7	28
+75	357	5	224
+75	464	6	224
+75	573	7	224
+76	357	0.1	0
+76	357	0.2	0
+76	357	0.3	0
+76	357	0.4	0
+76	357	0.5	0
+76	357	0.6	0
+76	357	0.7	0
+76	357	0.8	0
+76	357	0.9	0
+76	357	1	0
+76	357	1.1	0
+76	357	1.2	0
+76	357	1.3	0
+76	357	1.4	0
+76	357	1.5	0
+76	357	1.6	0
+76	357	1.7	0
+76	357	1.8	0
+76	357	1.9	0
+76	357	2	0
+76	357	2.1	0
+76	357	2.2	0
+76	357	2.3	0
+76	357	2.4	0
+76	357	2.5	0
+76	357	2.6	0
+76	357	2.7	0
+76	357	2.8	0
+76	357	2.9	0
+76	357	3	0
+76	357	3.1	0
+76	357	3.2	0
+76	357	3.3	0
+76	357	3.4	0
+76	357	3.5	0
+76	357	3.6	0
+76	357	3.7	0
+76	357	3.8	0
+76	357	3.9	0
+76	357	4	0
+76	357	4.1	0
+76	357	4.2	0
+76	357	4.3	0
+76	357	4.4	0
+76	357	4.5	0
+76	357	4.6	0
+76	357	4.7	0
+76	357	4.8	0
+76	357	4.9	0
+76	357	5	0
+76	464	5.1	2240
+76	464	5.2	0
+76	464	5.3	0
+76	464	5.4	0
+76	464	5.5	0
+76	464	5.6	0
+76	464	5.7	0
+76	464	5.8	0
+76	464	5.9	0
+76	464	6	0
+76	573	6.1	2240
+76	573	6.2	0
+76	573	6.3	0
+76	573	6.4	0
+76	573	6.5	0
+76	573	6.6	0
+76	573	6.7	0
+76	573	6.8	0
+76	573	6.9	0
+76	573	7	0
+77	357	5	0
+77	464	6	0
+77	573	7	0
+78	357	5	224
+78	464	6	224
+78	573	7	224
+79	357	0.1	0
+79	357	0.2	0
+79	357	0.3	0
+79	357	0.4	0
+79	357	0.5	0
+79	357	0.6	0
+79	357	0.7	0
+79	357	0.8	0
+79	357	0.9	0
+79	357	1	0
+79	357	1.1	0
+79	357	1.2	0
+79	357	1.3	0
+79	357	1.4	0
+79	357	1.5	0
+79	357	1.6	0
+79	357	1.7	0
+79	357	1.8	0
+79	357	1.9	0
+79	357	2	0
+79	357	2.1	0
+79	357	2.2	0
+79	357	2.3	0
+79	357	2.4	0
+79	357	2.5	0
+79	357	2.6	0
+79	357	2.7	0
+79	357	2.8	0
+79	357	2.9	0
+79	357	3	0
+79	357	3.1	0
+79	357	3.2	0
+79	357	3.3	0
+79	357	3.4	0
+79	357	3.5	0
+79	357	3.6	0
+79	357	3.7	0
+79	357	3.8	0
+79	357	3.9	0
+79	357	4	0
+79	357	4.1	0
+79	357	4.2	0
+79	357	4.3	0
+79	357	4.4	0
+79	357	4.5	0
+79	357	4.6	0
+79	357	4.7	0
+79	357	4.8	0
+79	357	4.9	0
+79	357	5	0
+79	464	5.1	2240
+79	464	5.2	0
+79	464	5.3	0
+79	464	5.4	0
+79	464	5.5	0
+79	464	5.6	0
+79	464	5.7	0
+79	464	5.8	0
+79	464	5.9	0
+79	464	6	0
+79	573	6.1	2240
+79	573	6.2	0
+79	573	6.3	0
+79	573	6.4	0
+79	573	6.5	0
+79	573	6.6	0
+79	573	6.7	0
+79	573	6.8	0
+79	573	6.9	0
+79	573	7	0
+80	357	5	28
+80	464	6	28
+80	573	7	28
+81	357	5	48
+81	464	6	48
+81	573	7	48
+82	369	5.000240389503	48
+82	478	6.000240387889	48
+82	587	7.000240386296	48
+83	369	5.000240389503	28
+83	478	6.000240387889	28
+83	587	7.000240386296	28
+84	372	5.000240796281	48
+84	481	6.000240794683	48
+84	590	7.000240793096	48
+85	372	5.000240796281	28
+85	481	6.000240794683	28
+85	590	7.000240793096	28
+86	375	5.000241115484	48
+86	484	6.000241113832	48
+86	593	7.000241112187	48
+87	375	5.000241115484	28
+87	484	6.000241113832	28
+87	593	7.000241112187	28
+vector 88 manets.nodoFijo1.app[0] throughput:vector ETV
+attr recordingmode vector
+attr source throughput(packetReceived)
+attr title throughput
+attr unit bps
+vector 89 manets.nodoFijo2.wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 90 manets.nodoFijo2.wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 91 manets.nodoMovil[0].wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 92 manets.nodoMovil[0].wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 93 manets.nodoMovil[1].wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 94 manets.nodoMovil[1].wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 95 manets.nodoMovil[2].wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 96 manets.nodoMovil[2].wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 97 manets.nodoMovil[3].wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 98 manets.nodoMovil[3].wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 99 manets.nodoMovil[4].wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 100 manets.nodoMovil[4].wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 101 manets.nodoMovil[5].wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 102 manets.nodoMovil[5].wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 103 manets.nodoMovil[6].wlan[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 104 manets.nodoMovil[6].wlan[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+76	663	7.1	2240
+76	663	7.2	0
+76	663	7.3	0
+76	663	7.4	0
+76	663	7.5	0
+76	663	7.6	0
+76	663	7.7	0
+76	663	7.789784344101	0
+79	663	7.1	2240
+79	663	7.2	0
+79	663	7.3	0
+79	663	7.4	0
+79	663	7.5	0
+79	663	7.6	0
+79	663	7.7	0
+79	663	7.789784344101	0
+88	663	0.1	0
+88	663	0.2	0
+88	663	0.3	0
+88	663	0.4	0
+88	663	0.5	0
+88	663	0.6	0
+88	663	0.7	0
+88	663	0.8	0
+88	663	0.9	0
+88	663	1	0
+88	663	1.1	0
+88	663	1.2	0
+88	663	1.3	0
+88	663	1.4	0
+88	663	1.5	0
+88	663	1.6	0
+88	663	1.7	0
+88	663	1.8	0
+88	663	1.9	0
+88	663	2	0
+88	663	2.1	0
+88	663	2.2	0
+88	663	2.3	0
+88	663	2.4	0
+88	663	2.5	0
+88	663	2.6	0
+88	663	2.7	0
+88	663	2.8	0
+88	663	2.9	0
+88	663	3	0
+88	663	3.1	0
+88	663	3.2	0
+88	663	3.3	0
+88	663	3.4	0
+88	663	3.5	0
+88	663	3.6	0
+88	663	3.7	0
+88	663	3.8	0
+88	663	3.9	0
+88	663	4	0
+88	663	4.1	0
+88	663	4.2	0
+88	663	4.3	0
+88	663	4.4	0
+88	663	4.5	0
+88	663	4.6	0
+88	663	4.7	0
+88	663	4.8	0
+88	663	4.9	0
+88	663	5	0
+88	663	5.1	0
+88	663	5.2	0
+88	663	5.3	0
+88	663	5.4	0
+88	663	5.5	0
+88	663	5.6	0
+88	663	5.7	0
+88	663	5.8	0
+88	663	5.9	0
+88	663	6	0
+88	663	6.1	0
+88	663	6.2	0
+88	663	6.3	0
+88	663	6.4	0
+88	663	6.5	0
+88	663	6.6	0
+88	663	6.7	0
+88	663	6.8	0
+88	663	6.9	0
+88	663	7	0
+88	663	7.1	0
+88	663	7.2	0
+88	663	7.3	0
+88	663	7.4	0
+88	663	7.5	0
+88	663	7.6	0
+88	663	7.7	0
+88	663	7.789784344101	0
+89	663	0.1	0
+89	663	0.2	0
+89	663	0.3	0
+89	663	0.4	0
+89	663	0.5	0
+89	663	0.6	0
+89	663	0.7	0
+89	663	0.8	0
+89	663	0.9	0
+89	663	1	0
+89	663	1.1	0
+89	663	1.2	0
+89	663	1.3	0
+89	663	1.4	0
+89	663	1.5	0
+89	663	1.6	0
+89	663	1.7	0
+89	663	1.8	0
+89	663	1.9	0
+89	663	2	0
+89	663	2.1	0
+89	663	2.2	0
+89	663	2.3	0
+89	663	2.4	0
+89	663	2.5	0
+89	663	2.6	0
+89	663	2.7	0
+89	663	2.8	0
+89	663	2.9	0
+89	663	3	0
+89	663	3.1	0
+89	663	3.2	0
+89	663	3.3	0
+89	663	3.4	0
+89	663	3.5	0
+89	663	3.6	0
+89	663	3.7	0
+89	663	3.8	0
+89	663	3.9	0
+89	663	4	0
+89	663	4.1	0
+89	663	4.2	0
+89	663	4.3	0
+89	663	4.4	0
+89	663	4.5	0
+89	663	4.6	0
+89	663	4.7	0
+89	663	4.8	0
+89	663	4.9	0
+89	663	5	0
+89	663	5.1	0
+89	663	5.2	0
+89	663	5.3	0
+89	663	5.4	0
+89	663	5.5	0
+89	663	5.6	0
+89	663	5.7	0
+89	663	5.8	0
+89	663	5.9	0
+89	663	6	0
+89	663	6.1	0
+89	663	6.2	0
+89	663	6.3	0
+89	663	6.4	0
+89	663	6.5	0
+89	663	6.6	0
+89	663	6.7	0
+89	663	6.8	0
+89	663	6.9	0
+89	663	7	0
+89	663	7.1	0
+89	663	7.2	0
+89	663	7.3	0
+89	663	7.4	0
+89	663	7.5	0
+89	663	7.6	0
+89	663	7.7	0
+89	663	7.789784344101	0
+90	663	0.1	0
+90	663	0.2	0
+90	663	0.3	0
+90	663	0.4	0
+90	663	0.5	0
+90	663	0.6	0
+90	663	0.7	0
+90	663	0.8	0
+90	663	0.9	0
+90	663	1	0
+90	663	1.1	0
+90	663	1.2	0
+90	663	1.3	0
+90	663	1.4	0
+90	663	1.5	0
+90	663	1.6	0
+90	663	1.7	0
+90	663	1.8	0
+90	663	1.9	0
+90	663	2	0
+90	663	2.1	0
+90	663	2.2	0
+90	663	2.3	0
+90	663	2.4	0
+90	663	2.5	0
+90	663	2.6	0
+90	663	2.7	0
+90	663	2.8	0
+90	663	2.9	0
+90	663	3	0
+90	663	3.1	0
+90	663	3.2	0
+90	663	3.3	0
+90	663	3.4	0
+90	663	3.5	0
+90	663	3.6	0
+90	663	3.7	0
+90	663	3.8	0
+90	663	3.9	0
+90	663	4	0
+90	663	4.1	0
+90	663	4.2	0
+90	663	4.3	0
+90	663	4.4	0
+90	663	4.5	0
+90	663	4.6	0
+90	663	4.7	0
+90	663	4.8	0
+90	663	4.9	0
+90	663	5	0
+90	663	5.1	0
+90	663	5.2	0
+90	663	5.3	0
+90	663	5.4	0
+90	663	5.5	0
+90	663	5.6	0
+90	663	5.7	0
+90	663	5.8	0
+90	663	5.9	0
+90	663	6	0
+90	663	6.1	0
+90	663	6.2	0
+90	663	6.3	0
+90	663	6.4	0
+90	663	6.5	0
+90	663	6.6	0
+90	663	6.7	0
+90	663	6.8	0
+90	663	6.9	0
+90	663	7	0
+90	663	7.1	0
+90	663	7.2	0
+90	663	7.3	0
+90	663	7.4	0
+90	663	7.5	0
+90	663	7.6	0
+90	663	7.7	0
+90	663	7.789784344101	0
+91	663	0.1	0
+91	663	0.2	0
+91	663	0.3	0
+91	663	0.4	0
+91	663	0.5	0
+91	663	0.6	0
+91	663	0.7	0
+91	663	0.8	0
+91	663	0.9	0
+91	663	1	0
+91	663	1.1	0
+91	663	1.2	0
+91	663	1.3	0
+91	663	1.4	0
+91	663	1.5	0
+91	663	1.6	0
+91	663	1.7	0
+91	663	1.8	0
+91	663	1.9	0
+91	663	2	0
+91	663	2.1	0
+91	663	2.2	0
+91	663	2.3	0
+91	663	2.4	0
+91	663	2.5	0
+91	663	2.6	0
+91	663	2.7	0
+91	663	2.8	0
+91	663	2.9	0
+91	663	3	0
+91	663	3.1	0
+91	663	3.2	0
+91	663	3.3	0
+91	663	3.4	0
+91	663	3.5	0
+91	663	3.6	0
+91	663	3.7	0
+91	663	3.8	0
+91	663	3.9	0
+91	663	4	0
+91	663	4.1	0
+91	663	4.2	0
+91	663	4.3	0
+91	663	4.4	0
+91	663	4.5	0
+91	663	4.6	0
+91	663	4.7	0
+91	663	4.8	0
+91	663	4.9	0
+91	663	5	0
+91	663	5.1	0
+91	663	5.2	0
+91	663	5.3	0
+91	663	5.4	0
+91	663	5.5	0
+91	663	5.6	0
+91	663	5.7	0
+91	663	5.8	0
+91	663	5.9	0
+91	663	6	0
+91	663	6.1	0
+91	663	6.2	0
+91	663	6.3	0
+91	663	6.4	0
+91	663	6.5	0
+91	663	6.6	0
+91	663	6.7	0
+91	663	6.8	0
+91	663	6.9	0
+91	663	7	0
+91	663	7.1	0
+91	663	7.2	0
+91	663	7.3	0
+91	663	7.4	0
+91	663	7.5	0
+91	663	7.6	0
+91	663	7.7	0
+91	663	7.789784344101	0
+92	663	0.1	0
+92	663	0.2	0
+92	663	0.3	0
+92	663	0.4	0
+92	663	0.5	0
+92	663	0.6	0
+92	663	0.7	0
+92	663	0.8	0
+92	663	0.9	0
+92	663	1	0
+92	663	1.1	0
+92	663	1.2	0
+92	663	1.3	0
+92	663	1.4	0
+92	663	1.5	0
+92	663	1.6	0
+92	663	1.7	0
+92	663	1.8	0
+92	663	1.9	0
+92	663	2	0
+92	663	2.1	0
+92	663	2.2	0
+92	663	2.3	0
+92	663	2.4	0
+92	663	2.5	0
+92	663	2.6	0
+92	663	2.7	0
+92	663	2.8	0
+92	663	2.9	0
+92	663	3	0
+92	663	3.1	0
+92	663	3.2	0
+92	663	3.3	0
+92	663	3.4	0
+92	663	3.5	0
+92	663	3.6	0
+92	663	3.7	0
+92	663	3.8	0
+92	663	3.9	0
+92	663	4	0
+92	663	4.1	0
+92	663	4.2	0
+92	663	4.3	0
+92	663	4.4	0
+92	663	4.5	0
+92	663	4.6	0
+92	663	4.7	0
+92	663	4.8	0
+92	663	4.9	0
+92	663	5	0
+92	663	5.1	0
+92	663	5.2	0
+92	663	5.3	0
+92	663	5.4	0
+92	663	5.5	0
+92	663	5.6	0
+92	663	5.7	0
+92	663	5.8	0
+92	663	5.9	0
+92	663	6	0
+92	663	6.1	0
+92	663	6.2	0
+92	663	6.3	0
+92	663	6.4	0
+92	663	6.5	0
+92	663	6.6	0
+92	663	6.7	0
+92	663	6.8	0
+92	663	6.9	0
+92	663	7	0
+92	663	7.1	0
+92	663	7.2	0
+92	663	7.3	0
+92	663	7.4	0
+92	663	7.5	0
+92	663	7.6	0
+92	663	7.7	0
+92	663	7.789784344101	0
+93	663	0.1	0
+93	663	0.2	0
+93	663	0.3	0
+93	663	0.4	0
+93	663	0.5	0
+93	663	0.6	0
+93	663	0.7	0
+93	663	0.8	0
+93	663	0.9	0
+93	663	1	0
+93	663	1.1	0
+93	663	1.2	0
+93	663	1.3	0
+93	663	1.4	0
+93	663	1.5	0
+93	663	1.6	0
+93	663	1.7	0
+93	663	1.8	0
+93	663	1.9	0
+93	663	2	0
+93	663	2.1	0
+93	663	2.2	0
+93	663	2.3	0
+93	663	2.4	0
+93	663	2.5	0
+93	663	2.6	0
+93	663	2.7	0
+93	663	2.8	0
+93	663	2.9	0
+93	663	3	0
+93	663	3.1	0
+93	663	3.2	0
+93	663	3.3	0
+93	663	3.4	0
+93	663	3.5	0
+93	663	3.6	0
+93	663	3.7	0
+93	663	3.8	0
+93	663	3.9	0
+93	663	4	0
+93	663	4.1	0
+93	663	4.2	0
+93	663	4.3	0
+93	663	4.4	0
+93	663	4.5	0
+93	663	4.6	0
+93	663	4.7	0
+93	663	4.8	0
+93	663	4.9	0
+93	663	5	0
+93	663	5.1	0
+93	663	5.2	0
+93	663	5.3	0
+93	663	5.4	0
+93	663	5.5	0
+93	663	5.6	0
+93	663	5.7	0
+93	663	5.8	0
+93	663	5.9	0
+93	663	6	0
+93	663	6.1	0
+93	663	6.2	0
+93	663	6.3	0
+93	663	6.4	0
+93	663	6.5	0
+93	663	6.6	0
+93	663	6.7	0
+93	663	6.8	0
+93	663	6.9	0
+93	663	7	0
+93	663	7.1	0
+93	663	7.2	0
+93	663	7.3	0
+93	663	7.4	0
+93	663	7.5	0
+93	663	7.6	0
+93	663	7.7	0
+93	663	7.789784344101	0
+94	663	0.1	0
+94	663	0.2	0
+94	663	0.3	0
+94	663	0.4	0
+94	663	0.5	0
+94	663	0.6	0
+94	663	0.7	0
+94	663	0.8	0
+94	663	0.9	0
+94	663	1	0
+94	663	1.1	0
+94	663	1.2	0
+94	663	1.3	0
+94	663	1.4	0
+94	663	1.5	0
+94	663	1.6	0
+94	663	1.7	0
+94	663	1.8	0
+94	663	1.9	0
+94	663	2	0
+94	663	2.1	0
+94	663	2.2	0
+94	663	2.3	0
+94	663	2.4	0
+94	663	2.5	0
+94	663	2.6	0
+94	663	2.7	0
+94	663	2.8	0
+94	663	2.9	0
+94	663	3	0
+94	663	3.1	0
+94	663	3.2	0
+94	663	3.3	0
+94	663	3.4	0
+94	663	3.5	0
+94	663	3.6	0
+94	663	3.7	0
+94	663	3.8	0
+94	663	3.9	0
+94	663	4	0
+94	663	4.1	0
+94	663	4.2	0
+94	663	4.3	0
+94	663	4.4	0
+94	663	4.5	0
+94	663	4.6	0
+94	663	4.7	0
+94	663	4.8	0
+94	663	4.9	0
+94	663	5	0
+94	663	5.1	0
+94	663	5.2	0
+94	663	5.3	0
+94	663	5.4	0
+94	663	5.5	0
+94	663	5.6	0
+94	663	5.7	0
+94	663	5.8	0
+94	663	5.9	0
+94	663	6	0
+94	663	6.1	0
+94	663	6.2	0
+94	663	6.3	0
+94	663	6.4	0
+94	663	6.5	0
+94	663	6.6	0
+94	663	6.7	0
+94	663	6.8	0
+94	663	6.9	0
+94	663	7	0
+94	663	7.1	0
+94	663	7.2	0
+94	663	7.3	0
+94	663	7.4	0
+94	663	7.5	0
+94	663	7.6	0
+94	663	7.7	0
+94	663	7.789784344101	0
+95	663	0.1	0
+95	663	0.2	0
+95	663	0.3	0
+95	663	0.4	0
+95	663	0.5	0
+95	663	0.6	0
+95	663	0.7	0
+95	663	0.8	0
+95	663	0.9	0
+95	663	1	0
+95	663	1.1	0
+95	663	1.2	0
+95	663	1.3	0
+95	663	1.4	0
+95	663	1.5	0
+95	663	1.6	0
+95	663	1.7	0
+95	663	1.8	0
+95	663	1.9	0
+95	663	2	0
+95	663	2.1	0
+95	663	2.2	0
+95	663	2.3	0
+95	663	2.4	0
+95	663	2.5	0
+95	663	2.6	0
+95	663	2.7	0
+95	663	2.8	0
+95	663	2.9	0
+95	663	3	0
+95	663	3.1	0
+95	663	3.2	0
+95	663	3.3	0
+95	663	3.4	0
+95	663	3.5	0
+95	663	3.6	0
+95	663	3.7	0
+95	663	3.8	0
+95	663	3.9	0
+95	663	4	0
+95	663	4.1	0
+95	663	4.2	0
+95	663	4.3	0
+95	663	4.4	0
+95	663	4.5	0
+95	663	4.6	0
+95	663	4.7	0
+95	663	4.8	0
+95	663	4.9	0
+95	663	5	0
+95	663	5.1	0
+95	663	5.2	0
+95	663	5.3	0
+95	663	5.4	0
+95	663	5.5	0
+95	663	5.6	0
+95	663	5.7	0
+95	663	5.8	0
+95	663	5.9	0
+95	663	6	0
+95	663	6.1	0
+95	663	6.2	0
+95	663	6.3	0
+95	663	6.4	0
+95	663	6.5	0
+95	663	6.6	0
+95	663	6.7	0
+95	663	6.8	0
+95	663	6.9	0
+95	663	7	0
+95	663	7.1	0
+95	663	7.2	0
+95	663	7.3	0
+95	663	7.4	0
+95	663	7.5	0
+95	663	7.6	0
+95	663	7.7	0
+95	663	7.789784344101	0
+96	663	0.1	0
+96	663	0.2	0
+96	663	0.3	0
+96	663	0.4	0
+96	663	0.5	0
+96	663	0.6	0
+96	663	0.7	0
+96	663	0.8	0
+96	663	0.9	0
+96	663	1	0
+96	663	1.1	0
+96	663	1.2	0
+96	663	1.3	0
+96	663	1.4	0
+96	663	1.5	0
+96	663	1.6	0
+96	663	1.7	0
+96	663	1.8	0
+96	663	1.9	0
+96	663	2	0
+96	663	2.1	0
+96	663	2.2	0
+96	663	2.3	0
+96	663	2.4	0
+96	663	2.5	0
+96	663	2.6	0
+96	663	2.7	0
+96	663	2.8	0
+96	663	2.9	0
+96	663	3	0
+96	663	3.1	0
+96	663	3.2	0
+96	663	3.3	0
+96	663	3.4	0
+96	663	3.5	0
+96	663	3.6	0
+96	663	3.7	0
+96	663	3.8	0
+96	663	3.9	0
+96	663	4	0
+96	663	4.1	0
+96	663	4.2	0
+96	663	4.3	0
+96	663	4.4	0
+96	663	4.5	0
+96	663	4.6	0
+96	663	4.7	0
+96	663	4.8	0
+96	663	4.9	0
+96	663	5	0
+96	663	5.1	0
+96	663	5.2	0
+96	663	5.3	0
+96	663	5.4	0
+96	663	5.5	0
+96	663	5.6	0
+96	663	5.7	0
+96	663	5.8	0
+96	663	5.9	0
+96	663	6	0
+96	663	6.1	0
+96	663	6.2	0
+96	663	6.3	0
+96	663	6.4	0
+96	663	6.5	0
+96	663	6.6	0
+96	663	6.7	0
+96	663	6.8	0
+96	663	6.9	0
+96	663	7	0
+96	663	7.1	0
+96	663	7.2	0
+96	663	7.3	0
+96	663	7.4	0
+96	663	7.5	0
+96	663	7.6	0
+96	663	7.7	0
+96	663	7.789784344101	0
+97	663	0.1	0
+97	663	0.2	0
+97	663	0.3	0
+97	663	0.4	0
+97	663	0.5	0
+97	663	0.6	0
+97	663	0.7	0
+97	663	0.8	0
+97	663	0.9	0
+97	663	1	0
+97	663	1.1	0
+97	663	1.2	0
+97	663	1.3	0
+97	663	1.4	0
+97	663	1.5	0
+97	663	1.6	0
+97	663	1.7	0
+97	663	1.8	0
+97	663	1.9	0
+97	663	2	0
+97	663	2.1	0
+97	663	2.2	0
+97	663	2.3	0
+97	663	2.4	0
+97	663	2.5	0
+97	663	2.6	0
+97	663	2.7	0
+97	663	2.8	0
+97	663	2.9	0
+97	663	3	0
+97	663	3.1	0
+97	663	3.2	0
+97	663	3.3	0
+97	663	3.4	0
+97	663	3.5	0
+97	663	3.6	0
+97	663	3.7	0
+97	663	3.8	0
+97	663	3.9	0
+97	663	4	0
+97	663	4.1	0
+97	663	4.2	0
+97	663	4.3	0
+97	663	4.4	0
+97	663	4.5	0
+97	663	4.6	0
+97	663	4.7	0
+97	663	4.8	0
+97	663	4.9	0
+97	663	5	0
+97	663	5.1	0
+97	663	5.2	0
+97	663	5.3	0
+97	663	5.4	0
+97	663	5.5	0
+97	663	5.6	0
+97	663	5.7	0
+97	663	5.8	0
+97	663	5.9	0
+97	663	6	0
+97	663	6.1	0
+97	663	6.2	0
+97	663	6.3	0
+97	663	6.4	0
+97	663	6.5	0
+97	663	6.6	0
+97	663	6.7	0
+97	663	6.8	0
+97	663	6.9	0
+97	663	7	0
+97	663	7.1	0
+97	663	7.2	0
+97	663	7.3	0
+97	663	7.4	0
+97	663	7.5	0
+97	663	7.6	0
+97	663	7.7	0
+97	663	7.789784344101	0
+98	663	0.1	0
+98	663	0.2	0
+98	663	0.3	0
+98	663	0.4	0
+98	663	0.5	0
+98	663	0.6	0
+98	663	0.7	0
+98	663	0.8	0
+98	663	0.9	0
+98	663	1	0
+98	663	1.1	0
+98	663	1.2	0
+98	663	1.3	0
+98	663	1.4	0
+98	663	1.5	0
+98	663	1.6	0
+98	663	1.7	0
+98	663	1.8	0
+98	663	1.9	0
+98	663	2	0
+98	663	2.1	0
+98	663	2.2	0
+98	663	2.3	0
+98	663	2.4	0
+98	663	2.5	0
+98	663	2.6	0
+98	663	2.7	0
+98	663	2.8	0
+98	663	2.9	0
+98	663	3	0
+98	663	3.1	0
+98	663	3.2	0
+98	663	3.3	0
+98	663	3.4	0
+98	663	3.5	0
+98	663	3.6	0
+98	663	3.7	0
+98	663	3.8	0
+98	663	3.9	0
+98	663	4	0
+98	663	4.1	0
+98	663	4.2	0
+98	663	4.3	0
+98	663	4.4	0
+98	663	4.5	0
+98	663	4.6	0
+98	663	4.7	0
+98	663	4.8	0
+98	663	4.9	0
+98	663	5	0
+98	663	5.1	0
+98	663	5.2	0
+98	663	5.3	0
+98	663	5.4	0
+98	663	5.5	0
+98	663	5.6	0
+98	663	5.7	0
+98	663	5.8	0
+98	663	5.9	0
+98	663	6	0
+98	663	6.1	0
+98	663	6.2	0
+98	663	6.3	0
+98	663	6.4	0
+98	663	6.5	0
+98	663	6.6	0
+98	663	6.7	0
+98	663	6.8	0
+98	663	6.9	0
+98	663	7	0
+98	663	7.1	0
+98	663	7.2	0
+98	663	7.3	0
+98	663	7.4	0
+98	663	7.5	0
+98	663	7.6	0
+98	663	7.7	0
+98	663	7.789784344101	0
+99	663	0.1	0
+99	663	0.2	0
+99	663	0.3	0
+99	663	0.4	0
+99	663	0.5	0
+99	663	0.6	0
+99	663	0.7	0
+99	663	0.8	0
+99	663	0.9	0
+99	663	1	0
+99	663	1.1	0
+99	663	1.2	0
+99	663	1.3	0
+99	663	1.4	0
+99	663	1.5	0
+99	663	1.6	0
+99	663	1.7	0
+99	663	1.8	0
+99	663	1.9	0
+99	663	2	0
+99	663	2.1	0
+99	663	2.2	0
+99	663	2.3	0
+99	663	2.4	0
+99	663	2.5	0
+99	663	2.6	0
+99	663	2.7	0
+99	663	2.8	0
+99	663	2.9	0
+99	663	3	0
+99	663	3.1	0
+99	663	3.2	0
+99	663	3.3	0
+99	663	3.4	0
+99	663	3.5	0
+99	663	3.6	0
+99	663	3.7	0
+99	663	3.8	0
+99	663	3.9	0
+99	663	4	0
+99	663	4.1	0
+99	663	4.2	0
+99	663	4.3	0
+99	663	4.4	0
+99	663	4.5	0
+99	663	4.6	0
+99	663	4.7	0
+99	663	4.8	0
+99	663	4.9	0
+99	663	5	0
+99	663	5.1	0
+99	663	5.2	0
+99	663	5.3	0
+99	663	5.4	0
+99	663	5.5	0
+99	663	5.6	0
+99	663	5.7	0
+99	663	5.8	0
+99	663	5.9	0
+99	663	6	0
+99	663	6.1	0
+99	663	6.2	0
+99	663	6.3	0
+99	663	6.4	0
+99	663	6.5	0
+99	663	6.6	0
+99	663	6.7	0
+99	663	6.8	0
+99	663	6.9	0
+99	663	7	0
+99	663	7.1	0
+99	663	7.2	0
+99	663	7.3	0
+99	663	7.4	0
+99	663	7.5	0
+99	663	7.6	0
+99	663	7.7	0
+99	663	7.789784344101	0
+100	663	0.1	0
+100	663	0.2	0
+100	663	0.3	0
+100	663	0.4	0
+100	663	0.5	0
+100	663	0.6	0
+100	663	0.7	0
+100	663	0.8	0
+100	663	0.9	0
+100	663	1	0
+100	663	1.1	0
+100	663	1.2	0
+100	663	1.3	0
+100	663	1.4	0
+100	663	1.5	0
+100	663	1.6	0
+100	663	1.7	0
+100	663	1.8	0
+100	663	1.9	0
+100	663	2	0
+100	663	2.1	0
+100	663	2.2	0
+100	663	2.3	0
+100	663	2.4	0
+100	663	2.5	0
+100	663	2.6	0
+100	663	2.7	0
+100	663	2.8	0
+100	663	2.9	0
+100	663	3	0
+100	663	3.1	0
+100	663	3.2	0
+100	663	3.3	0
+100	663	3.4	0
+100	663	3.5	0
+100	663	3.6	0
+100	663	3.7	0
+100	663	3.8	0
+100	663	3.9	0
+100	663	4	0
+100	663	4.1	0
+100	663	4.2	0
+100	663	4.3	0
+100	663	4.4	0
+100	663	4.5	0
+100	663	4.6	0
+100	663	4.7	0
+100	663	4.8	0
+100	663	4.9	0
+100	663	5	0
+100	663	5.1	0
+100	663	5.2	0
+100	663	5.3	0
+100	663	5.4	0
+100	663	5.5	0
+100	663	5.6	0
+100	663	5.7	0
+100	663	5.8	0
+100	663	5.9	0
+100	663	6	0
+100	663	6.1	0
+100	663	6.2	0
+100	663	6.3	0
+100	663	6.4	0
+100	663	6.5	0
+100	663	6.6	0
+100	663	6.7	0
+100	663	6.8	0
+100	663	6.9	0
+100	663	7	0
+100	663	7.1	0
+100	663	7.2	0
+100	663	7.3	0
+100	663	7.4	0
+100	663	7.5	0
+100	663	7.6	0
+100	663	7.7	0
+100	663	7.789784344101	0
+101	663	0.1	0
+101	663	0.2	0
+101	663	0.3	0
+101	663	0.4	0
+101	663	0.5	0
+101	663	0.6	0
+101	663	0.7	0
+101	663	0.8	0
+101	663	0.9	0
+101	663	1	0
+101	663	1.1	0
+101	663	1.2	0
+101	663	1.3	0
+101	663	1.4	0
+101	663	1.5	0
+101	663	1.6	0
+101	663	1.7	0
+101	663	1.8	0
+101	663	1.9	0
+101	663	2	0
+101	663	2.1	0
+101	663	2.2	0
+101	663	2.3	0
+101	663	2.4	0
+101	663	2.5	0
+101	663	2.6	0
+101	663	2.7	0
+101	663	2.8	0
+101	663	2.9	0
+101	663	3	0
+101	663	3.1	0
+101	663	3.2	0
+101	663	3.3	0
+101	663	3.4	0
+101	663	3.5	0
+101	663	3.6	0
+101	663	3.7	0
+101	663	3.8	0
+101	663	3.9	0
+101	663	4	0
+101	663	4.1	0
+101	663	4.2	0
+101	663	4.3	0
+101	663	4.4	0
+101	663	4.5	0
+101	663	4.6	0
+101	663	4.7	0
+101	663	4.8	0
+101	663	4.9	0
+101	663	5	0
+101	663	5.1	0
+101	663	5.2	0
+101	663	5.3	0
+101	663	5.4	0
+101	663	5.5	0
+101	663	5.6	0
+101	663	5.7	0
+101	663	5.8	0
+101	663	5.9	0
+101	663	6	0
+101	663	6.1	0
+101	663	6.2	0
+101	663	6.3	0
+101	663	6.4	0
+101	663	6.5	0
+101	663	6.6	0
+101	663	6.7	0
+101	663	6.8	0
+101	663	6.9	0
+101	663	7	0
+101	663	7.1	0
+101	663	7.2	0
+101	663	7.3	0
+101	663	7.4	0
+101	663	7.5	0
+101	663	7.6	0
+101	663	7.7	0
+101	663	7.789784344101	0
+102	663	0.1	0
+102	663	0.2	0
+102	663	0.3	0
+102	663	0.4	0
+102	663	0.5	0
+102	663	0.6	0
+102	663	0.7	0
+102	663	0.8	0
+102	663	0.9	0
+102	663	1	0
+102	663	1.1	0
+102	663	1.2	0
+102	663	1.3	0
+102	663	1.4	0
+102	663	1.5	0
+102	663	1.6	0
+102	663	1.7	0
+102	663	1.8	0
+102	663	1.9	0
+102	663	2	0
+102	663	2.1	0
+102	663	2.2	0
+102	663	2.3	0
+102	663	2.4	0
+102	663	2.5	0
+102	663	2.6	0
+102	663	2.7	0
+102	663	2.8	0
+102	663	2.9	0
+102	663	3	0
+102	663	3.1	0
+102	663	3.2	0
+102	663	3.3	0
+102	663	3.4	0
+102	663	3.5	0
+102	663	3.6	0
+102	663	3.7	0
+102	663	3.8	0
+102	663	3.9	0
+102	663	4	0
+102	663	4.1	0
+102	663	4.2	0
+102	663	4.3	0
+102	663	4.4	0
+102	663	4.5	0
+102	663	4.6	0
+102	663	4.7	0
+102	663	4.8	0
+102	663	4.9	0
+102	663	5	0
+102	663	5.1	0
+102	663	5.2	0
+102	663	5.3	0
+102	663	5.4	0
+102	663	5.5	0
+102	663	5.6	0
+102	663	5.7	0
+102	663	5.8	0
+102	663	5.9	0
+102	663	6	0
+102	663	6.1	0
+102	663	6.2	0
+102	663	6.3	0
+102	663	6.4	0
+102	663	6.5	0
+102	663	6.6	0
+102	663	6.7	0
+102	663	6.8	0
+102	663	6.9	0
+102	663	7	0
+102	663	7.1	0
+102	663	7.2	0
+102	663	7.3	0
+102	663	7.4	0
+102	663	7.5	0
+102	663	7.6	0
+102	663	7.7	0
+102	663	7.789784344101	0
+103	663	0.1	0
+103	663	0.2	0
+103	663	0.3	0
+103	663	0.4	0
+103	663	0.5	0
+103	663	0.6	0
+103	663	0.7	0
+103	663	0.8	0
+103	663	0.9	0
+103	663	1	0
+103	663	1.1	0
+103	663	1.2	0
+103	663	1.3	0
+103	663	1.4	0
+103	663	1.5	0
+103	663	1.6	0
+103	663	1.7	0
+103	663	1.8	0
+103	663	1.9	0
+103	663	2	0
+103	663	2.1	0
+103	663	2.2	0
+103	663	2.3	0
+103	663	2.4	0
+103	663	2.5	0
+103	663	2.6	0
+103	663	2.7	0
+103	663	2.8	0
+103	663	2.9	0
+103	663	3	0
+103	663	3.1	0
+103	663	3.2	0
+103	663	3.3	0
+103	663	3.4	0
+103	663	3.5	0
+103	663	3.6	0
+103	663	3.7	0
+103	663	3.8	0
+103	663	3.9	0
+103	663	4	0
+103	663	4.1	0
+103	663	4.2	0
+103	663	4.3	0
+103	663	4.4	0
+103	663	4.5	0
+103	663	4.6	0
+103	663	4.7	0
+103	663	4.8	0
+103	663	4.9	0
+103	663	5	0
+103	663	5.1	0
+103	663	5.2	0
+103	663	5.3	0
+103	663	5.4	0
+103	663	5.5	0
+103	663	5.6	0
+103	663	5.7	0
+103	663	5.8	0
+103	663	5.9	0
+103	663	6	0
+103	663	6.1	0
+103	663	6.2	0
+103	663	6.3	0
+103	663	6.4	0
+103	663	6.5	0
+103	663	6.6	0
+103	663	6.7	0
+103	663	6.8	0
+103	663	6.9	0
+103	663	7	0
+103	663	7.1	0
+103	663	7.2	0
+103	663	7.3	0
+103	663	7.4	0
+103	663	7.5	0
+103	663	7.6	0
+103	663	7.7	0
+103	663	7.789784344101	0
+104	663	0.1	0
+104	663	0.2	0
+104	663	0.3	0
+104	663	0.4	0
+104	663	0.5	0
+104	663	0.6	0
+104	663	0.7	0
+104	663	0.8	0
+104	663	0.9	0
+104	663	1	0
+104	663	1.1	0
+104	663	1.2	0
+104	663	1.3	0
+104	663	1.4	0
+104	663	1.5	0
+104	663	1.6	0
+104	663	1.7	0
+104	663	1.8	0
+104	663	1.9	0
+104	663	2	0
+104	663	2.1	0
+104	663	2.2	0
+104	663	2.3	0
+104	663	2.4	0
+104	663	2.5	0
+104	663	2.6	0
+104	663	2.7	0
+104	663	2.8	0
+104	663	2.9	0
+104	663	3	0
+104	663	3.1	0
+104	663	3.2	0
+104	663	3.3	0
+104	663	3.4	0
+104	663	3.5	0
+104	663	3.6	0
+104	663	3.7	0
+104	663	3.8	0
+104	663	3.9	0
+104	663	4	0
+104	663	4.1	0
+104	663	4.2	0
+104	663	4.3	0
+104	663	4.4	0
+104	663	4.5	0
+104	663	4.6	0
+104	663	4.7	0
+104	663	4.8	0
+104	663	4.9	0
+104	663	5	0
+104	663	5.1	0
+104	663	5.2	0
+104	663	5.3	0
+104	663	5.4	0
+104	663	5.5	0
+104	663	5.6	0
+104	663	5.7	0
+104	663	5.8	0
+104	663	5.9	0
+104	663	6	0
+104	663	6.1	0
+104	663	6.2	0
+104	663	6.3	0
+104	663	6.4	0
+104	663	6.5	0
+104	663	6.6	0
+104	663	6.7	0
+104	663	6.8	0
+104	663	6.9	0
+104	663	7	0
+104	663	7.1	0
+104	663	7.2	0
+104	663	7.3	0
+104	663	7.4	0
+104	663	7.5	0
+104	663	7.6	0
+104	663	7.7	0
+104	663	7.789784344101	0
+
